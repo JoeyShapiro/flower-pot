@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green House</title>
+</head>
+
+<script>
+    // window.onbeforeunload = function() {
+    //     return "NOOO DONT GO D:"
+    // };
+    var addEvent = function (obj, evt, fn) {
+        if (obj.addEventListener) {
+            obj.addEventListener(evt, fn, false);
+        }
+        else if (obj.attachEvent) {
+            obj.attachEvent("on" + evt, fn);
+        }
+    };
+
+    // when they leave the page
+    addEvent(document, "mouseout", function (event) {
+        event = event ? event : window.event;
+        var from = event.relatedTarget || event.toElement;
+        if ((!from || from.nodeName == "HTML") && event.clientY <= 0) {
+            document.getElementById("hello").style.display = "none";
+            document.getElementById("goodbye").style.display = "block";
+        }
+    });
+
+    // when they come back
+    addEvent(document, "mouseout", function (event) {
+        event = event ? event : window.event;
+        var from = event.relatedTarget || event.toElement;
+        if ((!from || from.nodeName == "HTML") && event.clientY >= 0) {
+            document.getElementById("hello").style.display = "block";
+            document.getElementById("goodbye").style.display = "none";
+        }
+    });
+</script>
+
+<body>
+    <!-- could also use some thing about checking mouse position -->
+    <div id="hello">
+        <h1>Welcome to my website :D</h1>
+        <h2>I use SSL and other stuff</h2>
+    </div>
+    <div id="goodbye" style="display: none;"">
+        <h1><b>NO</b> DONT GO <b>D:</b></h1>
+        <h2>I can use other things too</h2>
+    </div>
+</body>
+
+</html>
